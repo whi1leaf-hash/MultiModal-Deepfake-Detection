@@ -1,0 +1,18 @@
+# Core notebook and data tools
+jupyterlab
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+
+# Audio and speech notebooks
+torch
+torchaudio
+transformers
+librosa
+soundfile
+
+# Vision example notebook
+opencv-python
+mtcnn
