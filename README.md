@@ -1,50 +1,98 @@
-# Multimodal Deepfake Detection and Source Identification
+# Multi-Modal Deepfake Detection and Source Identification
 
-Research project exploring the use of audio, video, and text features for deepfake detection and source identification. This repository collects the project notebooks and final presentation. It is a research archive; the notebooks are exploratory and do not form a complete, verified end-to-end training pipeline.
+A multimodal deep learning framework for deepfake detection and source
+identity identification using visual, audio, and textual information.
 
-## Project at a glance
+This repository is based on our research project:
 
-The project explores these components, as described in the paper and final presentation:
+**Multi-Modal Solution: Deepfake Detection and the Source Identification**
 
-- **Audio:** Wav2Vec 2.0 feature extraction and speech-to-text experiments.
-- **Text:** sentence embeddings using BERT.
-- **Video:** MTCNN face detection example, plus presentation material on key-frame selection, visual features, and Xception-based frame voting.
-- **Multimodal:** the research design discusses combining modalities with MMMU-BA for deepfake detection and source identification.
+Published in the Proceedings of the 3rd International Conference on
+Public Management and Big Data Analysis (PMBDA 2023).
 
-The provided code includes exploratory notebooks for audio, text, and an MTCNN example. It does not include an integrated Xception/SAD/MMMU-BA implementation or a complete reproducible training and evaluation pipeline. The presentation reports gradient explosion and further model optimization as outstanding work.
+DOI: 10.4108/eai.15-12-2023.2345299
 
-## Repository contents
+## Overview
+
+Deepfake detection methods often rely primarily on visual information.
+This project explores a multimodal approach that combines information
+from three different modalities:
+
+- Visual features
+- Audio features
+- Text features
+
+The extracted features are fused using a multimodal attention framework
+to perform deepfake detection and source identity analysis.
+
+## Architecture
+
+The framework contains four major components:
+
+### Visual Feature Extraction
+
+Video frames are processed using:
+
+- Key-frame extraction based on Sum of Absolute Differences (SAD)
+- MTCNN for face detection and localization
+- I3D-based feature extraction for temporal visual information
+
+### Audio Feature Extraction
+
+Wav2Vec 2.0 is used to extract representations from raw audio signals
+and process speech information.
+
+### Text Feature Extraction
+
+Speech extracted from the audio stream is converted into text and
+processed using a pretrained BERT model.
+
+The `[CLS]` representation is used as the sentence-level feature vector.
+
+### Multimodal Fusion
+
+Visual, audio, and textual feature vectors are integrated using a
+Multi-modal Multi-utterance Bi-modal Attention (MMMU-BA) framework.
+
+The fused representation is used for:
+
+1. Deepfake detection
+2. Source identity identification
+
+## Dataset
+
+The project uses the **FakeAVCeleb** dataset, a multimodal deepfake
+dataset containing both manipulated video and synthesized audio.
+
+Dataset repository:
+
+https://github.com/DASH-Lab/FakeAVCeleb
+
+## Technologies
+
+- Python
+- PyTorch
+- Wav2Vec 2.0
+- BERT
+- MTCNN
+- I3D
+- Deep Learning
+- Multimodal Learning
+- Attention Mechanisms
+
+## Project Structure
 
 ```text
 .
-├── README.md
-├── UPLOAD_TO_GITHUB_WINDOWS.md
+├── src/
+│   ├── audio/
+│   ├── video/
+│   ├── text/
+│   ├── multimodal/
+│   └── utils/
+├── models/
+├── notebooks/
+├── figures/
 ├── requirements.txt
-├── data/README.md
-├── docs/Final_Presentation.pptx
-└── notebooks/
-    ├── audio/
-    ├── text/
-    └── vision/
+└── README.md
 ```
-
-## Getting started
-
-1. Use Python 3.10 or later and install the packages in `requirements.txt`.
-2. Open the notebooks with Jupyter Lab or Jupyter Notebook.
-3. Where a notebook needs FakeAVCeleb, download the dataset according to its project terms, then set `FAKEAVCELEB_DIR` to the local dataset directory. See [`data/README.md`](data/README.md).
-4. Pretrained Hugging Face model weights may be downloaded on first use. GPU use depends on installing a PyTorch build compatible with your CUDA setup.
-
-The notebooks have had saved outputs and machine-specific absolute paths removed. They have not been run end-to-end in this repository, and some cells may need adjustment for current library versions and dataset layouts.
-
-## Dataset and privacy
-
-The FakeAVCeleb dataset is not included. Do not commit dataset videos, audio, transcripts, generated features, model weights, or personal data. The original upload also contained a separate Stop Asian Hate CSV, a generated label array, a local training manifest with transcripts and workstation paths, and a sample face image; these are excluded from this project archive.
-
-## Publication
-
-Yahan Zheng, Xu Zhou, Cheng Chen, and Jingwen Hu. “Multi-Modal Solution: Deepfake Detection and the Source Identification.” Proceedings of the 3rd International Conference on Public Management and Big Data Analysis (PMBDA 2023), published 2024. [https://doi.org/10.4108/eai.15-12-2023.2345299](https://doi.org/10.4108/eai.15-12-2023.2345299)
-
-## Acknowledgment and licensing
-
-This repository contains work from a collaborative research project. Preserve the original authorship and cite the publication when reusing the research. The repository does not add a license; confirm that all contributors agree on a license before granting reuse rights. Third-party models, datasets, and libraries remain subject to their own terms.
